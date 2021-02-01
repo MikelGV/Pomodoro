@@ -1,6 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel, QToolBar, QAction, QStatusBar
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -8,22 +9,31 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("My Awesome App")
 
-        label = QLabel("This is awesome")
-        label.setAlignment(Qt.AlignCenter)
+        layout = QVBoxLayout()
+        widgets = [QCheckBox,
+                   QComboBox,
+                   QDateEdit,
+                   QDateTimeEdit,
+                   QDial,
+                   QDoubleSpinBox,
+                   QFontComboBox,
+                   QLCDNumber,
+                   QLabel,
+                   QLineEdit,
+                   QProgressBar,
+                   QPushButton,
+                   QRadioButton,
+                   QSlider,
+                   QSpinBox,
+                   QTimeEdit
+                   ]
+        for w in widgets:
+            layout.addWidget(w())
 
-        toolbar = QToolBar("My main toolbar")
-        self.addToolBar(toolbar)
+        widget = QWidget()
+        widget.setLayout(layout)
 
-        button_action = QAction("Your button", self)
-        button_action.setStatusTip("this is your button")
-        button_action.triggered.connect(self.onMyToolBarButtonClick)
-        button_action.setCheckable(True)
-        toolbar.addAction(button_action)
-
-        self.setStatusBar(QStatusBar(self))
-
-    def onMyToolBarButtonClick(self, s):
-        print("click", s)
+        self.setCentralWidget(widget)
 
 app = QApplication(sys.argv)
 
