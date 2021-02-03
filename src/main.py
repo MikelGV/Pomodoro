@@ -8,6 +8,8 @@ from PyQt5.QtGui import *
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
+        self.Ui()
+    def Ui(self, *args, **kwargs):
         #  pomodoro has 4 blocks of work in each block there are different stages
         #  pomodoro(Working time == 25 min) short_break(short time rest == 5) long_break(long time rest == 15)
         self.pomodoroCount = 0
