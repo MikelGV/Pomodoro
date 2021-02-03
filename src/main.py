@@ -4,6 +4,14 @@ import time
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+class Color(QWidget):
+    def __init__(self, color, *args, **kwargs):
+        super(Color, self).__init__(*args, **kwargs)
+        self.setAutoFillBackground(True)
+
+        palette = self.palette()
+        palette.setColor(QPalette.Window, QColor(color))
+        self.setPalette(palette)
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -26,25 +34,26 @@ class MainWindow(QMainWindow):
         short_break = QPushButton('Short Break')
         long_break = QPushButton('Long break')
         self.placeHolder = QLabel('Place Holder')
-        self.placeHolder.setStyleSheet('border: 6px solid black')
         self.placeHolder.setFont(QFont('Aerial', 7))
         self.placeHolder.setAlignment(Qt.AlignCenter)
         self.placeHolder.setFixedSize(QSize(200, 100))
         startBtn = QPushButton('Start')
-        settingsBtn = QPushButton('Settings')
+        settings = QPushButton('Settings')
         # Adding the widgets
+
         layout.addWidget(pomodoro_button, 0, 0)
         layout.addWidget(short_break, 0, 1)
         layout.addWidget(long_break, 0, 2)
         layout.addWidget(self.placeHolder, 1, 1)
         layout.addWidget(startBtn, 2, 1)
-        layout.addWidget(settingsBtn, 3, 1)
+        layout.addWidget(settings, 3, 1)
+
         # button functionality
         pomodoro_button.clicked.connect(self.pomodoro)
         short_break.clicked.connect(self.shortBreak)
         long_break.clicked.connect(self.longBreak)
         startBtn.clicked.connect(self.startPomodoro)
-        settingsBtn.clicked.connect(self.setting)
+        settings.clicked.connect(self.setting)
         #  timer
         timer = QTimer(self)
         timer.timeout.connect(self.show_time)
@@ -64,7 +73,7 @@ class MainWindow(QMainWindow):
         self.start = True
         print(self.start)
 
-    def setting(self):  # settings button logic
+    def setting(self):  # Adding a task
         pass
 
     def show_time(self):
@@ -83,7 +92,7 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 
 window = MainWindow()
-# window.show()
+
 # Starting the event loop.
 app.exec()
 # The app will not reach this part until you close the app and the event loop has finished
