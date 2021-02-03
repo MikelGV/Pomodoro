@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         self.pomodoroCount = 0
         self.count = 0  # Seconds
 
-        self.start = False  # Boolean to control if the timer is on or of
+        self.start = False  # Boolean to control if the timer is ON or OFF
 
         self.setWindowTitle("Pomodoro App")
 
