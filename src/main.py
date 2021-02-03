@@ -65,8 +65,9 @@ class MainWindow(QMainWindow):
         self.start = True
         print(self.start)
 
-    def setting(self):  # Adding a task
-        pass
+    def setting(self):  # Adding a setting functionality
+        self.w = Second_Window()
+        self.w.show()
 
     def show_time(self):
         mins, secs = divmod(self.count, 60)
@@ -77,6 +78,14 @@ class MainWindow(QMainWindow):
             if self.count == 0:
                 self.start = False
         self.placeHolder.setText(time_format)
+
+class Second_Window(QWidget):
+    def __init__(self, *args, **kwargs):
+        super(Second_Window, self).__init__(*args, **kwargs)
+        layout = QVBoxLayout()
+        self.label = QLabel('Second Window')
+        layout.addWidget(self.label)
+        self.setLayout(layout)
 
 # One QApplication needed
 # Pass in sys.argv to allow command line arguments for the app.
