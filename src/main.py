@@ -7,10 +7,9 @@ from PyQt5.QtGui import *
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
-        #  pomodoro has 4 blocks of work in each block there are different stages
-        #  aKa pomodoro(Working time == 25 min) short_break(short time rest == 5) long_break(long time rest == 15)
         super(MainWindow, self).__init__(*args, **kwargs)
-
+        #  pomodoro has 4 blocks of work in each block there are different stages
+        #  pomodoro(Working time == 25 min) short_break(short time rest == 5) long_break(long time rest == 15)
         self.pomodoroCount = 0
         self.count = 0  # Seconds
 
@@ -49,7 +48,7 @@ class MainWindow(QMainWindow):
         timer.timeout.connect(self.show_time)
         timer.start(100)
 
-        self.show()
+        self.show()  # Showing the widgets
         # Setting the layout and the widget
         widget.setLayout(layout)
         self.setCentralWidget(widget)
@@ -63,21 +62,26 @@ class MainWindow(QMainWindow):
         self.start = True
         print(self.start)
 
-    def setting(self):
+    def setting(self):  # settings button logic
         pass
 
     def show_time(self):
         mins, secs = divmod(self.count, 60)
-        time_format = '{:02d}:{:02d}'.format(mins, secs)
-        if self.start:
-            self.count -= 1
+        time_format = '{:02d}:{:02d}'.format(mins, secs)  # Printing the text of the count
+        if self.start:  # Checking if is True or False
+            self.count -= 1  # Incrementing the count
             time.sleep(1)
             if self.count == 0:
                 self.start = False
         self.placeHolder.setText(time_format)
+
+# One QApplication needed
+# Pass in sys.argv to allow command line arguments for the app.
+# QApplication([]) works too.
 app = QApplication(sys.argv)
 
 window = MainWindow()
 # window.show()
-
+# Starting the event loop.
 app.exec()
+# The app will not reach this part until you close the app and the event loop has finished
