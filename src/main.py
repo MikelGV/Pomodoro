@@ -25,10 +25,14 @@ class MainWindow(QMainWindow):
         pomodoro_button = QPushButton('pomodoro')
         short_break = QPushButton('Short Break')
         long_break = QPushButton('Long break')
-        self.placeHolder = QLabel('Place Holder')
+        self.setGeometry(100, 100, 600, 200)
+        self.placeHolder = QLabel('Place Holder', self)
+        self.placeHolder.setStyleSheet('border: 3px solid black; border-radius: 50px')
+        self.placeHolder.move(100, 100)
+        self.placeHolder.resize(80, 80)
         self.placeHolder.setFont(QFont('Aerial', 7))
         self.placeHolder.setAlignment(Qt.AlignCenter)
-        self.placeHolder.setFixedSize(QSize(200, 100))
+        self.placeHolder.setFixedSize(QSize(100, 100))
         startBtn = QPushButton('Start')
         settings = QPushButton('Settings')
         # Adding the widgets
@@ -65,10 +69,6 @@ class MainWindow(QMainWindow):
         self.start = True
         print(self.start)
 
-    def setting(self):  # Adding a setting functionality
-        self.w = Second_Window()
-        self.w.show()
-
     def show_time(self):
         mins, secs = divmod(self.count, 60)
         time_format = '{:02d}:{:02d}'.format(mins, secs)  # Printing the text of the count
@@ -79,13 +79,7 @@ class MainWindow(QMainWindow):
                 self.start = False
         self.placeHolder.setText(time_format)
 
-class Second_Window(QWidget):
-    def __init__(self, *args, **kwargs):
-        super(Second_Window, self).__init__(*args, **kwargs)
-        layout = QVBoxLayout()
-        self.label = QLabel('Second Window')
-        layout.addWidget(self.label)
-        self.setLayout(layout)
+
 
 # One QApplication needed
 # Pass in sys.argv to allow command line arguments for the app.
